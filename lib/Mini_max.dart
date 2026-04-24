@@ -146,7 +146,7 @@ bool CheckWinAI(List<List<int>>board,int player) {
             {
               int row=get_Drop_row(board, col);
               board[row][col]=2;
-              int score =mini_max(board,  3,  false);
+              int score =mini_max(board,4,  false);
               board[row][col]=0;
               if(score>bestscore)
                 {

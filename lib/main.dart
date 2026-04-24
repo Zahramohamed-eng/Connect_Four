@@ -46,6 +46,10 @@ class ConnectFour_State extends State<ConnectFour>
   ];
   int current_player=1;
    String status="Player 1 Turn";
+
+
+
+
   bool drop_piece (int col)
   {
     for(int row=5;row>=0;row--)
@@ -57,6 +61,10 @@ class ConnectFour_State extends State<ConnectFour>
           }
       }return false;
   }
+
+
+
+
 
   void move_handle(int col)
   { if(game_over==true){return;}
@@ -71,8 +79,8 @@ class ConnectFour_State extends State<ConnectFour>
     }
 
         setState(() {
-          if(check_win(1)) {
-            status = "Player Wins🥳";
+          if(check_win(current_player)) {
+            status =vsAI? " Player Wins🥳":"Player $current_player Wins🥳";
             game_over = true;
              }else{
             if (vsAI == true) {
@@ -82,10 +90,10 @@ class ConnectFour_State extends State<ConnectFour>
             else {
               if (current_player == 1) {
                 current_player = 2;
-                status = "Player 2 Turn";
+                status = vsAI?"AI Turn":"Player 2 Turn";
               } else {
                 current_player = 1;
-                status = "Player 1 Turn";
+                status =   status = vsAI?" Player Turn":"Player $current_player Turn";;
               }}
             }
           });
@@ -93,6 +101,7 @@ class ConnectFour_State extends State<ConnectFour>
           {
             Future.delayed( Duration(milliseconds:500),()
             {
+
               Ai_move();
             }
 
@@ -102,7 +111,13 @@ class ConnectFour_State extends State<ConnectFour>
           }
 
   }
-  void Ai_move()
+
+
+
+
+
+
+    void Ai_move()
   { if(game_over==true)
     {
       return;
@@ -117,7 +132,7 @@ class ConnectFour_State extends State<ConnectFour>
   if(move== false) {return;}
          setState(() {
                 if(check_win( 2)){
-                  status="AI Wins 🧠";
+                  status= "AI Wins 🧠";
                   game_over=true;}
                 else
                   {
@@ -125,6 +140,11 @@ class ConnectFour_State extends State<ConnectFour>
                     status="Player 1 Turn";}});
 
   }
+
+
+
+
+
   void resetGame()
   {
     board=[
