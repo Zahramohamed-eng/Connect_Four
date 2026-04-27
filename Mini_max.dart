@@ -94,12 +94,12 @@ bool CheckWinAI(List<List<int>>board,int player) {
    {
      if(CheckWinAI(board,2))
        {
-         return 100;
+         return 1000;
        }
 
      if(CheckWinAI(board,1))
      {
-       return -100;
+       return -1000;
      }
      if (IsFull(board))
        {
@@ -111,7 +111,7 @@ bool CheckWinAI(List<List<int>>board,int player) {
          return 0;
        }
      if(IsMax) {
-       int bestscore = -100;
+       int bestscore = -1000;
        for (int col in get_moves_AI(board)) {
          int row = get_Drop_row(board, col);
          board[row][col] = 2;
@@ -142,10 +142,28 @@ bool CheckWinAI(List<List<int>>board,int player) {
           int bestscore=-100;
           List<int> bestMoves=[];
           
-          for(int col in get_moves_AI(board))
-            {
-              int row=get_Drop_row(board, col);
-              board[row][col]=2;
+          for(int col in get_moves_AI(board)) {
+            int row = get_Drop_row(board, col);
+            board[row][col] = 2;
+            if (CheckWinAI(board, 2)) {
+              board[row][col] = 0;
+              return col;
+            }
+            board[row][col] = 0;
+          }
+
+          for(int col in get_moves_AI(board)) {
+            int row = get_Drop_row(board, col);
+            board[row][col] = 1;
+            if (CheckWinAI(board, 1)) {
+              board[row][col] = 0;
+              return col;
+            }
+            board[row][col] = 0;
+          }
+            for(int col in get_moves_AI(board)) {
+              int row = get_Drop_row(board, col);
+              board[row][col] = 2;
               int score =mini_max(board,4,  false);
               board[row][col]=0;
               if(score>bestscore)
@@ -157,6 +175,6 @@ bool CheckWinAI(List<List<int>>board,int player) {
                   {
                     bestMoves.add(col);
                   }
-            }
+             }
           return  bestMoves[Random().nextInt( bestMoves.length)];
         }
