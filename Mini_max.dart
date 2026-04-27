@@ -94,12 +94,12 @@ bool CheckWinAI(List<List<int>>board,int player) {
    {
      if(CheckWinAI(board,2))
        {
-         return 1000;
+         return 100;
        }
 
      if(CheckWinAI(board,1))
      {
-       return -1000;
+       return -100;
      }
      if (IsFull(board))
        {
