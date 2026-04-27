@@ -3,8 +3,8 @@ import 'main.dart';
 import'dart:math';
 
 bool CheckWinAI(List<List<int>>board,int player) {
-  for (int row = 0; row < 5; row++) {
-    for (int col = 0; col < 3; col++) {
+  for (int row = 0; row < 6; row++) {
+    for (int col = 0; col < 4; col++) {
       if(board[row][col]==player
           &&board[row][col+1]==player
           &&board[row][col+2]==player&&
@@ -122,7 +122,7 @@ bool CheckWinAI(List<List<int>>board,int player) {
 
          }}return bestscore;}
          else {
-           int bestscore = 100;
+           int bestscore = 1000;
            for (int col in get_moves_AI(board)) {
              int row = get_Drop_row(board, col);
              board[row][col] = 1;
@@ -139,7 +139,7 @@ bool CheckWinAI(List<List<int>>board,int player) {
 
         int best_move(List<List<int>>board)
         {
-          int bestscore=-100;
+          int bestscore=-1000;
           List<int> bestMoves=[];
           
           for(int col in get_moves_AI(board)) {
